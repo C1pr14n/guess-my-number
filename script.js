@@ -11,6 +11,10 @@ const body = document.querySelector("body");
 let newRandom = Math.floor(Math.random() * 20) + 1;
 let newHighscore = 0;
 
+const displayMessage = (m) => {
+  message.textContent = m;
+}
+
 const checkNumber = (e) => {
   let newScore = Number(score.textContent);
   let localHighscore;
@@ -19,22 +23,22 @@ const checkNumber = (e) => {
 
   if (!guessInput.value) return;
   if (newScore === 1) {
-    message.textContent = "💔 Game over!";
+    displayMessage("💔 Game over!");
     return;
   }
 
   if (+guessInput.value > newRandom) {
-    message.textContent = "📈 too high!";
+    displayMessage("📈 too high!");
     newScore -= 1;
     score.textContent = newScore;
   } else if (+guessInput.value < newRandom) {
-    message.textContent = "📉 too low";
+    displayMessage("📉 too low");
     newScore -= 1;
     score.textContent = newScore;
   } else {
     body.style.backgroundColor = "#60b347";
     number.textContent = newRandom;
-    message.textContent = "🎉 Correct number!";
+    displayMessage("🎉 Correct number!");
     localHighscore = newScore;
     if (localHighscore > newHighscore) {
       newHighscore = localHighscore;
@@ -46,7 +50,7 @@ const checkNumber = (e) => {
 
 const restartGame = (e) => {
   e.preventDefault();
-  message.textContent = "Start guessing...";
+  displayMessage("Start guessing...");
   number.textContent = "?";
   body.style.backgroundColor = "#222";
   score.textContent = 20;
