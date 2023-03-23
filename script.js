@@ -13,15 +13,16 @@ let newHighscore = 0;
 
 const displayMessage = (m) => {
   message.textContent = m;
-}
+};
 
-const checkNumber = (e) => {
+const checkNumber = () => {
   let newScore = Number(score.textContent);
   let localHighscore;
 
-  if (e.key === 13) return;
-
-  if (!guessInput.value) return;
+  if (!guessInput.value) {
+    displayMessage("⛔ No number selected!");
+    return;
+  }
   if (newScore === 1) {
     displayMessage("💔 Game over!");
     return;
@@ -59,3 +60,7 @@ const restartGame = (e) => {
 
 btnCheck.addEventListener("click", checkNumber);
 btnAgain.addEventListener("click", restartGame);
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") checkNumber();
+});
